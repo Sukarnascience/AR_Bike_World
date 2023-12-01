@@ -29,6 +29,7 @@ class ARViewActivity : AppCompatActivity() {
             modelName = whichProduct
             // Inside your activity or fragment
             Toast.makeText(this, modelName, Toast.LENGTH_SHORT).show()
+            openAR(modelName)
         }
 
         val fab: FloatingActionButton = findViewById(R.id.productInfoBtn)
