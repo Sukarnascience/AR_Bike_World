@@ -25,11 +25,15 @@ class ARViewActivity : AppCompatActivity() {
 
         // Retrieve the clicked button information from the intent
         val whichProduct = intent.getStringExtra("productName")
+        //openAR(modelName)
         if (whichProduct != null) {
             modelName = whichProduct
             // Inside your activity or fragment
             Toast.makeText(this, modelName, Toast.LENGTH_SHORT).show()
             openAR(modelName)
+        }
+        else{
+            openAR("Bike01")
         }
 
         val fab: FloatingActionButton = findViewById(R.id.productInfoBtn)
