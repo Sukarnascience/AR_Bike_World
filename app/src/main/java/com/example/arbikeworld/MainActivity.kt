@@ -2,9 +2,12 @@ package com.example.arbikeworld
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageView
+import android.widget.Toast
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class MainActivity : AppCompatActivity() {
@@ -13,10 +16,27 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val fab: FloatingActionButton = findViewById(R.id.openWebPage)
-        fab.setOnClickListener {
+        val fabWeb: FloatingActionButton = findViewById(R.id.openWebPage)
+        fabWeb.setOnClickListener {
             val webPageUrl = "https://www.yamaha-motor-india.com/"
             openWebView(webPageUrl)
+        }
+
+        val fabQRAR: FloatingActionButton = findViewById(R.id.ARonQR)
+        fabQRAR.setOnClickListener {
+            val packageName = "com.DefaultCompany.AR_BikeWorld_Unity"
+
+            if (isAppInstalled(packageName)) {
+                val intent = packageManager.getLaunchIntentForPackage(packageName)
+                startActivity(intent)
+            } else {
+                // The Unity app is not installed, show a Toast
+                Toast.makeText(
+                    this,
+                    "Unity AR App is not available. Please install it Github.",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
         }
 
         val bike01: ImageView = findViewById(R.id.bike01)
@@ -56,5 +76,14 @@ class MainActivity : AppCompatActivity() {
         val intent = Intent(this, ARViewActivity::class.java)
         intent.putExtra("productName", clickedButton)
         startActivity(intent)
+    }
+
+    private fun isAppInstalled(packageName: String): Boolean {
+        return try {
+            packageManager.getPackageInfo(packageName, PackageManager.GET_ACTIVITIES)
+            true
+        } catch (e: PackageManager.NameNotFoundException) {
+            false
+        }
     }
 }

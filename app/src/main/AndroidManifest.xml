@@ -15,6 +15,9 @@
         android:theme="@style/Theme.ARBikeWorld"
         tools:targetApi="31">
         <activity
+            android:name=".QRARViewActivity"
+            android:exported="false" />
+        <activity
             android:name=".ARViewActivity"
             android:exported="false" />
         <activity
