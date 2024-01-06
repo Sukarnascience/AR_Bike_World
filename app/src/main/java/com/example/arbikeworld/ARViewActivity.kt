@@ -108,6 +108,7 @@ class ARViewActivity : AppCompatActivity() {
     }
 
     // Function to show Toast based on the model
+    @SuppressLint("MissingInflatedId")
     private fun showToastBasedOnModel(modelName: String?) {
         val toastMessage = when (modelName) {
             "Bike01" -> "Name: R15 V4\n" +
@@ -155,6 +156,21 @@ class ARViewActivity : AppCompatActivity() {
             else -> "Error in fetching details..."
         }
 
-        Toast.makeText(this, toastMessage, Toast.LENGTH_LONG).show()
+        val inflater = layoutInflater
+        val layout = inflater.inflate(
+            R.layout.custom_toast_layout,
+            findViewById(R.id.customToastLayout)
+        )
+
+        val text = layout.findViewById<TextView>(R.id.customToastTextView)
+        text.text = toastMessage
+
+        with(Toast(applicationContext)) {
+            duration = Toast.LENGTH_LONG
+            view = layout
+            show()
+        }
+
+        //Toast.makeText(this, toastMessage, Toast.LENGTH_LONG).show()
     }
 }
