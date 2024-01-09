@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity() {
 
         val fabWeb: FloatingActionButton = findViewById(R.id.webPage)
         fabWeb.setOnClickListener {
-            val webPageUrl = "https://github.com/akhila0320/ARBikeWorldApp"
+            val webPageUrl = "https://github.com/Sukarnascience/AR_Bike_World"
             openWebView(webPageUrl)
         }
 
